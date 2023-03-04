@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".GameStart">
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="武器選擇"
+        android:textSize="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+
+    <Button
+        android:id="@+id/Ax"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="選斧頭"
+        android:backgroundTint="#8A5A00"
+        app:layout_constraintEnd_toStartOf="@+id/textView2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+    <TextView
+        android:id="@+id/AxText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="拿著十分重的斧頭與敵人戰鬥\n在攻擊以及防禦方面都相當出色\n武器過重導致速度比其他種類的武器慢"
+        app:layout_constraintBottom_toBottomOf="@+id/Ax"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/Ax"
+        app:layout_constraintTop_toTopOf="@+id/Ax"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <Button
+        android:id="@+id/Rapier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="選刺劍"
+        android:backgroundTint="#F28500"
+        app:layout_constraintStart_toStartOf="@+id/Ax"
+        app:layout_constraintTop_toBottomOf="@+id/Ax" />
+
+    <TextView
+        android:id="@+id/RapierText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="具有相當出色的速度以及高超的技巧\n透過十分靈活的閃避與技巧和敵人作戰\n唯一美中不足的地方是攻擊力太低"
+        app:layout_constraintBottom_toBottomOf="@+id/Rapier"
+        app:layout_constraintStart_toStartOf="@+id/AxText"
+        app:layout_constraintTop_toTopOf="@+id/Rapier" />
+
+    <Button
+        android:id="@+id/Shield"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:backgroundTint="#87CEEB	"
+        android:text="選大盾"
+        app:layout_constraintStart_toStartOf="@+id/Rapier"
+        app:layout_constraintTop_toBottomOf="@+id/Rapier" />
+
+    <TextView
+        android:id="@+id/ShieldText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="擁有相當優秀的防禦以及血量\n在戰鬥中不需要消耗太多體力\n但因攻擊力過低使戰鬥時間非常長久"
+        app:layout_constraintBottom_toBottomOf="@+id/Shield"
+        app:layout_constraintStart_toStartOf="@+id/RapierText"
+        app:layout_constraintTop_toTopOf="@+id/Shield" />
+
+    <Button
+        android:id="@+id/Sword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:backgroundTint="@color/black"
+        android:textColor="#FFFFFF"
+        android:text="選直劍"
+        app:layout_constraintStart_toStartOf="@+id/Shield"
+        app:layout_constraintTop_toBottomOf="@+id/Shield" />
+
+    <TextView
+        android:id="@+id/SwordText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="在所有數值中最平恆的角色\n因為過於平衡導致很多事情都做不好\n但是設定過於可疑可能藏有什麼秘密"
+        app:layout_constraintBottom_toBottomOf="@+id/Sword"
+        app:layout_constraintStart_toStartOf="@+id/ShieldText"
+        app:layout_constraintTop_toTopOf="@+id/Sword" />
+
+    <Button
+        android:id="@+id/Stick"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:backgroundTint="#FF80BF"
+        android:text="選棍"
+        app:layout_constraintStart_toStartOf="@+id/Sword"
+        app:layout_constraintTop_toBottomOf="@+id/Sword" />
+
+    <TextView
+        android:id="@+id/StickText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="在遊戲前期是相當強悍的武器\n在武器之中最好起手的武器\n但在要小心後期強悍程度會越不明顯"
+        app:layout_constraintBottom_toBottomOf="@+id/Stick"
+        app:layout_constraintStart_toStartOf="@+id/SwordText"
+        app:layout_constraintTop_toTopOf="@+id/Stick" />
+
+    <TextView
+        android:id="@+id/textView23"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="BetaVer1.0.0"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
