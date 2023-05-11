@@ -26,7 +26,7 @@ public class Town extends AppCompatActivity {
         Mission = findViewById(R.id.Mission);
         Explore = findViewById(R.id.Explore);
 
-        UserValue = findViewById(R.id.UserValue);
+        //UserValue = findViewById(R.id.UserValue);
 
         Intent GetValue = getIntent();
         int Player[] = new int[8];
