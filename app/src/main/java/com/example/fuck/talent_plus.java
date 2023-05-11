@@ -7,41 +7,36 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
-import java.util.Locale;
-
 public class talent_plus extends AppCompatActivity {
 
-    SeekBar HPseekBar,ATKseekBar,DEFseekBar,PHSseekBar,AGIseekBar,SPDseekBar,ATCseekBar,LUKseekBar;
-    EditText HPNumber,ATKNumber,DEFNumber,PHSNumber,AGINumber,SPDNumber,ATCNumber,LUKNumber;
-    Button GameReadStart;
-    int HP,ATK,DEF,PHS,AGI,SPD,ATC,LUK;
-    int TotalValue = 80;
+    SeekBar HPseekBar,STRseekBar,DEFseekBar,PHSseekBar,AGIseekBar,SPDseekBar,ATCseekBar,LUKseekBar; //宣告使用者可以使用的seekbar
+    EditText HPNumber,STRNumber,DEFNumber,PHSNumber,AGINumber,SPDNumber,ATCNumber,LUKNumber;    //宣告使用者可以使用的text
+    Button GameReadStart;   //宣告使用者可以宣告的按鈕
+    int HP,STR,DEF,PHS,AGI,SPD,ATC,LUK,TotalValue = 80; //宣告使用者可以使用的數值
 
 
 
-    void setUpSeekBar(SeekBar seekBar, final TextView textView) {
-        seekBar.setMax(20);
-        seekBar.setProgress(10);
-        seekBar.setMin(0);
+    private void setUpSeekBar(SeekBar seekBar, final TextView textView) {
+        seekBar.setMax(20); //seekbar設定最高數值
+        seekBar.setProgress(10);    //設定剛進入時的初始數值
+        seekBar.setMin(0);  //設定最小數值
         textView.setText(String.valueOf(seekBar.getProgress()));
-
+        //將seekBar的內容轉換成字串在Text上面顯示，讓使用者可以在進入頁面的時候看到初始設定的數值
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                textView.setText(String.valueOf(seekBar.getProgress()));
-                TotalValue = HPseekBar.getProgress() + ATKseekBar.getProgress() +
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {    //拖動seekBar時
+                textView.setText(String.valueOf(seekBar.getProgress()));    //讀取SeekBar上面的數值
+                TotalValue = HPseekBar.getProgress() + STRseekBar.getProgress() +
                 DEFseekBar.getProgress() + PHSseekBar.getProgress() + AGIseekBar.getProgress() +
                 SPDseekBar.getProgress() + ATCseekBar.getProgress() + LUKseekBar.getProgress();
-
-                if (TotalValue > 100) {
+                //將所有數值加總在TotalValue，用來之後偵測是否超過數值
+                if (TotalValue > 100) { //如果加總的數值超過100，將該移動的SeekBar的數鎖定在100內
                     seekBar.setProgress(seekBar.getProgress() - (TotalValue-100));
-
                 }
             }
 
@@ -52,72 +47,74 @@ public class talent_plus extends AppCompatActivity {
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
             }
+
         });
 
-        textView.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            textView.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if (charSequence.length() == 0) {   //因為int的內容不可為空值，故設計成當使用者刪除完內容時將為0
-                    textView.setText("0");
-                    return;
-                }
-                int Player = Integer.parseInt(charSequence.toString());
-                if (Player > 20) {
-                    textView.setText("20");
-                    seekBar.setProgress(seekBar.getProgress() - (TotalValue - 100));
-
-                } else {
-                     seekBar.setProgress(Player);
-                     TotalValue = TotalValue + (Player - Integer.parseInt(textView.getText().toString()));
                 }
 
-            }
+                @Override
+                public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                    if (charSequence.length() == 0) {   //因為int的內容不可為空值，故設計成當使用者刪除完內容時將為0並跳出迴圈
+                        textView.setText("0");
+                        return;
+                    }
+                    int Player = Integer.parseInt(charSequence.toString());
+                    if (Player > 20) {  //當使用者的數大於20時將數跳回20內並將總數確認是否在至100內
+                        seekBar.setProgress(seekBar.getProgress() - (TotalValue - 100));
+                        textView.setText("20");
+                    } else {
+                         seekBar.setProgress(Player);
+                         TotalValue = TotalValue + (Player - Integer.parseInt(textView.getText().toString()));
+                    }
 
-            @Override
-            public void afterTextChanged(Editable editable) {
+                }
 
-            }
+                @Override
+                public void afterTextChanged(Editable editable) {
+
+                }
         });
     }
 
-    void GameGo(){
+    private void GameStart(){
 
         AlertDialog.Builder ConfirmToGO = new AlertDialog.Builder(talent_plus.this);
         ConfirmToGO.setTitle("確認要出發嗎？");
-        ConfirmToGO.setMessage("經過加成後，您的數值為：" + "\n血量："+ (HP + HPseekBar.getProgress()) +
-        "\n攻擊：" + (ATK + ATKseekBar.getProgress()) + "\n防禦：" + (DEF + DEFseekBar.getProgress()) +
+        ConfirmToGO.setMessage("經過加成後，您的數值為：" + "\n血量："+ (HP + (HPseekBar.getProgress() * 10)) +
+        "\n力量：" + (STR + STRseekBar.getProgress()) + "\n防禦：" + (DEF + DEFseekBar.getProgress()) +
         "\n體力：" + (PHS + PHSseekBar.getProgress()) + "\n速度：" + (SPD + SPDseekBar.getProgress()) +
         "\n敏捷：" + (AGI + AGIseekBar.getProgress()) + "\n技巧：" + (ATC + ATCseekBar.getProgress()) +
         "\n運氣：" + (LUK + LUKseekBar.getProgress()) +
         (TotalValue < 100 ?"\n您的數值尚未使用完畢，您還有" + (100 - TotalValue) + "點數值，確認要出發嗎？":""));
 
-        ConfirmToGO.setPositiveButton("確認", (dialogInterface, i) -> {
+          ConfirmToGO.setPositiveButton("確認", (dialogInterface, i) -> {
 
-            int MaxHP = HP + HPseekBar.getProgress();
-            int MaxATK = ATK + ATKseekBar.getProgress();
-            int MaxDEF = DEF + DEFseekBar.getProgress();
-            int MaxPHS = PHS + PHSseekBar.getProgress();
-            int MaxSPD = SPD + SPDseekBar.getProgress();
-            int MaxAGI = AGI + AGIseekBar.getProgress();
-            int MaxATC = ATC + ATCseekBar.getProgress();
-            int MaxLUK = LUK + LUKseekBar.getProgress();
+            HP  += ( HPseekBar.getProgress() * 10);
+            STR += STRseekBar.getProgress();
+            DEF += DEFseekBar.getProgress();
+            PHS += PHSseekBar.getProgress();
+            SPD += SPDseekBar.getProgress();
+            AGI += AGIseekBar.getProgress();
+            ATC += ATCseekBar.getProgress();
+            LUK += LUKseekBar.getProgress();
 
             Intent GoToStory = new Intent(talent_plus.this, Story.class);
-            GoToStory.putExtra("InitialHP",MaxHP);
-            GoToStory.putExtra("InitialATK",MaxATK);
-            GoToStory.putExtra("InitialDEF",MaxDEF);
-            GoToStory.putExtra("InitialPHS",MaxPHS);
-            GoToStory.putExtra("InitialSPD",MaxSPD);
-            GoToStory.putExtra("InitialAGI",MaxAGI);
-            GoToStory.putExtra("InitialATC",MaxATC);
-            GoToStory.putExtra("InitialLUK",MaxLUK);
+            Intent PassValue = new Intent(talent_plus.this, Town.class);
+            PassValue.putExtra("InitialHP",HP);
+            PassValue.putExtra("InitialSTR",STR);
+            PassValue.putExtra("InitialDEF",DEF);
+            PassValue.putExtra("InitialPHS",PHS);
+            PassValue.putExtra("InitialSPD",SPD);
+            PassValue.putExtra("InitialAGI",AGI);
+            PassValue.putExtra("InitialATC",ATC);
+            PassValue.putExtra("InitialLUK",LUK);
 
             startActivity(GoToStory);
+            startActivity(PassValue);
         });
         ConfirmToGO.show();
     }
@@ -128,7 +125,7 @@ public class talent_plus extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_talent_plus);
 
-        ATKseekBar = findViewById(R.id.ATKseekBar);
+        STRseekBar = findViewById(R.id.STRseekBar);
         HPseekBar = findViewById(R.id.HPseekBar);
         DEFseekBar = findViewById(R.id.DEFseekBar);
         PHSseekBar = findViewById(R.id.PHSseekBar);
@@ -138,7 +135,7 @@ public class talent_plus extends AppCompatActivity {
         LUKseekBar = findViewById(R.id.LUKseekBar);
 
         HPNumber = findViewById(R.id.HPNumber);
-        ATKNumber = findViewById(R.id.ATKNumber);
+        STRNumber = findViewById(R.id.STRNumber);
         DEFNumber = findViewById(R.id.DEFNumber);
         PHSNumber = findViewById(R.id.PHSNumber);
         AGINumber = findViewById(R.id.AGINumber);
@@ -149,7 +146,7 @@ public class talent_plus extends AppCompatActivity {
         GameReadStart = findViewById(R.id.GameReadStart);
 
         setUpSeekBar(HPseekBar, HPNumber);
-        setUpSeekBar(ATKseekBar, ATKNumber);
+        setUpSeekBar(STRseekBar, STRNumber);
         setUpSeekBar(DEFseekBar, DEFNumber);
         setUpSeekBar(PHSseekBar, PHSNumber);
         setUpSeekBar(SPDseekBar, SPDNumber);
@@ -159,7 +156,7 @@ public class talent_plus extends AppCompatActivity {
 
         Intent ChangeToTalent = getIntent();
         HP = ChangeToTalent.getIntExtra("HP", 0);
-        ATK = ChangeToTalent.getIntExtra("ATK", 0);
+        STR = ChangeToTalent.getIntExtra("STR", 0);
         DEF = ChangeToTalent.getIntExtra("DEF", 0);
         PHS = ChangeToTalent.getIntExtra("PHS", 0);
         SPD = ChangeToTalent.getIntExtra("SPD", 0);
@@ -167,12 +164,7 @@ public class talent_plus extends AppCompatActivity {
         ATC = ChangeToTalent.getIntExtra("ATC", 0);
         LUK = ChangeToTalent.getIntExtra("LUK", 0);
 
-        GameReadStart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                GameGo();
-            }
-        });
+        GameReadStart.setOnClickListener(view -> GameStart());
 
 
     }

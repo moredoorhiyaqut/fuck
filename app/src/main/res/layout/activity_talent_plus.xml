@@ -42,25 +42,25 @@
         app:layout_constraintTop_toTopOf="@+id/HPseekBar" />
 
     <SeekBar
-        android:id="@+id/ATKseekBar"
+        android:id="@+id/STRseekBar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="20dp"
         app:layout_constraintBottom_toBottomOf="@+id/textView6"
-        app:layout_constraintEnd_toStartOf="@+id/ATKNumber"
+        app:layout_constraintEnd_toStartOf="@+id/STRNumber"
         app:layout_constraintStart_toStartOf="@+id/HPseekBar"
         app:layout_constraintTop_toTopOf="@+id/textView6" />
 
     <EditText
-        android:id="@+id/ATKNumber"
+        android:id="@+id/STRNumber"
         android:layout_width="80dp"
         android:layout_height="wrap_content"
         android:maxLength="2"
         android:ems="10"
         android:inputType="number"
-        app:layout_constraintBottom_toBottomOf="@+id/ATKseekBar"
+        app:layout_constraintBottom_toBottomOf="@+id/STRseekBar"
         app:layout_constraintEnd_toEndOf="@+id/HPNumber"
-        app:layout_constraintTop_toTopOf="@+id/ATKseekBar" />
+        app:layout_constraintTop_toTopOf="@+id/STRseekBar" />
 
     <SeekBar
         android:id="@+id/DEFseekBar"
@@ -69,7 +69,7 @@
         android:layout_marginEnd="20dp"
         app:layout_constraintBottom_toBottomOf="@+id/textView12"
         app:layout_constraintEnd_toStartOf="@+id/DEFNumber"
-        app:layout_constraintStart_toStartOf="@+id/ATKseekBar"
+        app:layout_constraintStart_toStartOf="@+id/STRseekBar"
         app:layout_constraintTop_toTopOf="@+id/textView12" />
 
     <EditText
@@ -80,7 +80,7 @@
         android:ems="10"
         android:inputType="number"
         app:layout_constraintBottom_toBottomOf="@+id/DEFseekBar"
-        app:layout_constraintEnd_toEndOf="@+id/ATKNumber"
+        app:layout_constraintEnd_toEndOf="@+id/STRNumber"
         app:layout_constraintTop_toTopOf="@+id/DEFseekBar" />
 
     <SeekBar
@@ -203,7 +203,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
-        android:text="所有點數最多為100點，每個數值點數最多可加至20點"
+        android:text="所有點數最多為100點，每個數值點數最多可加至20點\n血量每1點算10點"
         app:layout_constraintEnd_toEndOf="@+id/LUKNumber"
         app:layout_constraintStart_toStartOf="@+id/textView17"
         app:layout_constraintTop_toBottomOf="@+id/LUKseekBar" />
@@ -224,7 +224,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:text="攻擊"
+        android:text="力量"
         android:textSize="20dp"
         app:layout_constraintStart_toStartOf="@+id/textView5"
         app:layout_constraintTop_toBottomOf="@+id/textView5" />
