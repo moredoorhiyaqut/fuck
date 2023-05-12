@@ -79,11 +79,12 @@ public class GameStart extends AppCompatActivity {
 
         if (PassWord.equals(TruePassWord)){
             return;
-        } else if(TruePassWord.startsWith(PassWord)) {
-                PassWord += PassWordNum[Key];
-                if (PassWord.equals(TruePassWord)){
-                    InPassWord();
-                }
+        } else if (TruePassWord.startsWith(PassWord)) {
+            PassWord += PassWordNum[Key];
+            if (PassWord.equals(TruePassWord)){
+                PlayerValue(300,45,20,35,45,40,35,15,5);
+                InPassWord();
+            }
         } else {
                 PassWord = "";
         }
@@ -142,4 +143,5 @@ public class GameStart extends AppCompatActivity {
         });
 
     }
+
 }
