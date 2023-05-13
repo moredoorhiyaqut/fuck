@@ -102,8 +102,9 @@ public class talent_plus extends AppCompatActivity {
             ATC += ATCseekBar.getProgress();
             LUK += LUKseekBar.getProgress();
 
-            Intent GoToStory = new Intent(talent_plus.this, Story.class);
             Intent PassValue = new Intent(talent_plus.this, Town.class);
+            Intent GoToStory = new Intent(talent_plus.this, Story.class);
+
             PassValue.putExtra("InitialHP",HP);
             PassValue.putExtra("InitialSTR",STR);
             PassValue.putExtra("InitialDEF",DEF);

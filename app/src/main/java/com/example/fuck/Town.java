@@ -2,6 +2,7 @@ package com.example.fuck;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
@@ -13,7 +14,7 @@ public class Town extends AppCompatActivity {
     Text UserValue;
 
     void  DisplayValue(){
-
+        UserValue.setTextContent("123123");
     }
 
     @Override
@@ -29,12 +30,15 @@ public class Town extends AppCompatActivity {
         //UserValue = findViewById(R.id.UserValue);
 
         Intent GetValue = getIntent();
-        int Player[] = new int[8];
-        String PlayerValue[] = {"HP", "STR", "DEF", "PHS", "SPD", "AGI", "ATC", "LUK"};
+        int[] Player = new int[8];
+        String[] PlayerValue = {"HP", "STR", "DEF", "PHS", "SPD", "AGI", "ATC", "LUK"};
 
         for(int i = 0;i < PlayerValue.length ;i++){
             Player[i] = GetValue.getIntExtra(PlayerValue[i],0);
         }
+
+        DisplayValue();
+
 
     }
 

@@ -68,6 +68,7 @@ public class GameStart extends AppCompatActivity {
     }
 
     private void PlayerValue(int HP,int STR,int DEF, int PHS, int SPD,int AGI,int ATC,int LUK, int Key){
+        //設定使用者按下按鈕後會觸發的方法，設定玩家數值
         this.HP  = HP;
         this.STR = STR;
         this.DEF = DEF;
@@ -77,15 +78,16 @@ public class GameStart extends AppCompatActivity {
         this.ATC = ATC;
         this.LUK = LUK;
 
-        if (PassWord.equals(TruePassWord)){
-            return;
+        if (TruePassWord.equals(PassWord)){ //如果玩家已經輸入完成密碼，當使用者觸發方法時就只會設定數值
         } else if (TruePassWord.startsWith(PassWord)) {
+            //當使用者沒有打完成密碼，就會判斷玩家所按的密碼是否有照順序輸入，沒有則清空
             PassWord += PassWordNum[Key];
             if (PassWord.equals(TruePassWord)){
+                //當使用者觸發方法時，將數值更改為選雙刀的值，並呼叫出解鎖雙刀的小視窗
                 PlayerValue(300,45,20,35,45,40,35,15,5);
                 InPassWord();
             }
-        } else {
+        } else {    //當使用者輸入的數值沒有依照順序，則將輸入的密碼清空
                 PassWord = "";
         }
 
@@ -123,13 +125,14 @@ public class GameStart extends AppCompatActivity {
 
         Sword.setOnClickListener(view -> {
             if ("選直劍".equals(Sword.getText().toString())) {
+                //當使用者按下按鈕內容為選直劍時，輸入密碼，如果沒有輸入成功密碼則不會觸發隱藏技能
                 PlayerValue(250,25,20,20,20,20,15,10,3);
-                if (PassWord.equals(TruePassWord)){
+                if (PassWord.equals(TruePassWord)){ //當使用者輸入完成密碼後將數值改為雙刀的數值
                     PlayerValue(300,45,20,35,45,40,35,15,5);
-                    return;
                 }
                 PressSelect("直劍");
             } else {
+                //當輸入其他的範圍時判定為雙刀
                 PlayerValue(300,45,20,35,45,40,35,15,5);
                 PressSelect("雙刀");
             }
