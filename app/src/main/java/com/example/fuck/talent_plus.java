@@ -4,6 +4,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -81,7 +82,6 @@ public class talent_plus extends AppCompatActivity {
     }
 
     private void GameStart(){
-
         AlertDialog.Builder ConfirmToGO = new AlertDialog.Builder(talent_plus.this);
         ConfirmToGO.setTitle("確認要出發嗎？");
         ConfirmToGO.setMessage("經過加成後，您的數值為：" + "\n血量："+ (HP + (HPseekBar.getProgress() * 10)) +
@@ -91,9 +91,8 @@ public class talent_plus extends AppCompatActivity {
         "\n運氣：" + (LUK + LUKseekBar.getProgress()) +
         (TotalValue < 100 ?"\n您的數值尚未使用完畢，您還有" + (100 - TotalValue) + "點數值，確認要出發嗎？":""));
 
-          ConfirmToGO.setPositiveButton("確認", (dialogInterface, i) -> {
-
-            HP  += ( HPseekBar.getProgress() * 10);
+        ConfirmToGO.setPositiveButton("確認", (dialogInterface, i) -> {
+            HP  += ( HPseekBar.getProgress() * 10); //將數值更變為最終數值
             STR += STRseekBar.getProgress();
             DEF += DEFseekBar.getProgress();
             PHS += PHSseekBar.getProgress();
@@ -102,20 +101,17 @@ public class talent_plus extends AppCompatActivity {
             ATC += ATCseekBar.getProgress();
             LUK += LUKseekBar.getProgress();
 
-            Intent PassValue = new Intent(talent_plus.this, Town.class);
-            Intent GoToStory = new Intent(talent_plus.this, Story.class);
+            SharedPreferences.Editor editor = getSharedPreferences("Combat", MODE_PRIVATE).edit();
+            //創建一個SharedPreferences，來讓Town頁面來獲取玩家最終的數值
+            int[]  PassValue = {HP, STR, DEF, PHS, SPD, AGI, ATC, LUK};
+            String[] PlayerValueName = {"FinalHP", "FinalSTR", "FinalDEF", "FinalPHS", "FinalSPD", "FinalAGI", "FinalATC", "FinalLUK"};
+            //設定陣列，使之後可以用for迴圈傳遞減少程式碼長度
+            for (i = 0; i < PassValue.length; i++) {
+                editor.putInt(PlayerValueName[i], PassValue[i]);
+            }
+            editor.apply();
 
-            PassValue.putExtra("InitialHP",HP);
-            PassValue.putExtra("InitialSTR",STR);
-            PassValue.putExtra("InitialDEF",DEF);
-            PassValue.putExtra("InitialPHS",PHS);
-            PassValue.putExtra("InitialSPD",SPD);
-            PassValue.putExtra("InitialAGI",AGI);
-            PassValue.putExtra("InitialATC",ATC);
-            PassValue.putExtra("InitialLUK",LUK);
-
-            startActivity(GoToStory);
-            startActivity(PassValue);
+            startActivity(new Intent(talent_plus.this, Story.class));   //轉換到下一頁
         });
         ConfirmToGO.show();
     }

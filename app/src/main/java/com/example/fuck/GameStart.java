@@ -16,7 +16,7 @@ public class GameStart extends AppCompatActivity {
     TextView SwordText; //設定文字變數，因為只有直劍旁邊的文字會被更改故只設定文字
 
     private String PassWord = ""; //將密碼清空，避免使用者進入時因為前面曾輸入過導致使用者無法讓密碼正確
-    private final String[] PassWordNum = {"1", "2", "3", "4", "5"}; //設定一個陣列，讓使用者按下按鈕密碼分別輸入密碼
+    private final String[] PassWordNum = {"1", "2", "3", "4", "5", ""}; //設定一個陣列，讓使用者按下按鈕密碼分別輸入密碼
     private final String TruePassWord = "114514"; //正確密碼為114514
     int HP,STR,DEF,PHS,SPD,AGI,ATC,LUK; //設定所有數值的簡稱
 
@@ -54,7 +54,7 @@ public class GameStart extends AppCompatActivity {
 
         Sword.setText("選雙刀");   //將按鈕內的文字成選雙刀
         Sword.setBackgroundColor(Color.parseColor("#80FFFF"));  //將按鈕的顏色改為指定的藍色
-        Sword.setTextColor(Color.parseColor("#80FFFF"));    //將按鈕內的文字改為黑色
+        Sword.setTextColor(Color.parseColor("#000000"));    //將按鈕內的文字改為黑色
         SwordText.setText("你在無意之中發現了自己能使用雙刀流" + //更改
                           "\n為了探索這個破格技能的解鎖方法" +
                           "\n而將自己這個破格能力隱藏不人知道");
@@ -129,6 +129,7 @@ public class GameStart extends AppCompatActivity {
                 PlayerValue(250,25,20,20,20,20,15,10,3);
                 if (PassWord.equals(TruePassWord)){ //當使用者輸入完成密碼後將數值改為雙刀的數值
                     PlayerValue(300,45,20,35,45,40,35,15,5);
+                    return;
                 }
                 PressSelect("直劍");
             } else {

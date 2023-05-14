@@ -13,10 +13,6 @@ public class Town extends AppCompatActivity {
     Button Knife_Shop,Wrapon_Shop,Mission,Explore;
     Text UserValue;
 
-    void  DisplayValue(){
-        UserValue.setTextContent("123123");
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,7 +33,7 @@ public class Town extends AppCompatActivity {
             Player[i] = GetValue.getIntExtra(PlayerValue[i],0);
         }
 
-        DisplayValue();
+        //DisplayValue();
 
 
     }
